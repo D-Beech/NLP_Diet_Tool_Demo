@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Tracker</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Track your nutrition and fuel your gains">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Diet Tracker">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM3OC4zIDQ4IDY0IDYyLjMgNjQgODBWNjRIMTI4VjgwQzEyOCA2Mi4zIDExMy43IDQ4IDk2IDQ4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTk2IDE0NEM3OC4zIDE0NCA2NCAxNTguMyA2NCAxNzZIMTI4QzEyOCAxNTguMyAxMTMuNyAxNDQgOTYgMTQ0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE0NCA4MEg0OEM0My42IDgwIDQwIDgzLjYgNDAgODhWMTQ0QzQwIDE0OC40IDQzLjYgMTUyIDQ4IDE1MkgxNDRDMTQ4LjQgMTUyIDE1MiAxNDguNCAxNTIgMTQ0Vjg4QzE1MiA4My42IDE0OC40IDgwIDE0NCA4MFoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxOTIiIHkyPSIxOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N2VlYSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRiYTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="showScreen('add', this)">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Add</span>
+        </button>
+        <button class="nav-btn" onclick="showScreen('totals', this)">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Totals</span>
+        </button>
+        <button class="nav-btn" onclick="showScreen('log', this)">
+            <span class="nav-icon">🍎</span>
+            <span class="nav-label">Log</span>
+        </button>
+        <button class="nav-btn" onclick="showScreen('progress', this)">
+            <span class="nav-icon">📈</span>
+            <span class="nav-label">Progress</span>
+        </button>
+        <button class="nav-btn" onclick="toggleTheme()" id="theme-toggle">
+            <span class="nav-icon">🌙</span>
+            <span class="nav-label">Theme</span>
+        </button>
+    </nav>
+
+    <!-- Add Food Screen -->
+    <div id="add-screen" class="screen active">
+        <div class="container">
+            <h1>🍎 Add Food</h1>
+            <p>Enter food in natural language</p>
+            
+            <div class="input-section">
+                <input type="text" id="foodInput" placeholder="e.g., 200g chicken breast, 2 apples" />
+                <button onclick="addFood()" class="add-btn">Add Food</button>
+            </div>
+            
+            <div class="extracted-foods">
+                <h3>Extracted Foods</h3>
+                <div id="extractedFoodsContainer" class="extracted-container">
+                    <div class="extracted-placeholder">Food will appear here as it's processed...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Totals Screen -->
+    <div id="totals-screen" class="screen">
+        <div class="container">
+            <h1>📊 Daily Totals</h1>
+            
+            <div class="totals-section">
+                <div class="total-card">
+                    <div class="total-icon">🔥</div>
+                    <div class="total-content">
+                        <span class="total-label">Calories</span>
+                        <span class="total-value" id="calories-total">0</span>
+                    </div>
+                </div>
+                
+                <div class="macros-grid">
+                    <div class="macro-item">
+                        <span class="macro-icon">🥩</span>
+                        <span class="macro-label">Protein</span>
+                        <span class="macro-value" id="protein-total">0.0g</span>
+                    </div>
+                    <div class="macro-item">
+                        <span class="macro-icon">🍞</span>
+                        <span class="macro-label">Carbs</span>
+                        <span class="macro-value" id="carbs-total">0.0g</span>
+                    </div>
+                    <div class="macro-item">
+                        <span class="macro-icon">🥑</span>
+                        <span class="macro-label">Fat</span>
+                        <span class="macro-value" id="fat-total">0.0g</span>
+                    </div>
+                    <div class="macro-item">
+                        <span class="macro-icon">🌾</span>
+                        <span class="macro-label">Fiber</span>
+                        <span class="macro-value" id="fiber-total">0.0g</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <h3>Today's Stats</h3>
+                <div class="stat-item">
+                    <span>Food Items:</span>
+                    <span class="stat-value" id="food-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Avg per Item:</span>
+                    <span class="stat-value" id="avg-calories">0 cal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Log Screen -->
+    <div id="log-screen" class="screen">
+        <div class="container">
+            <div class="log-header">
+                <h1>🍎 Food Log</h1>
+                <button onclick="clearLog()" class="clear-btn">Clear All</button>
+            </div>
+            
+            <div class="food-list" id="food-list">
+                <div class="empty-state">
+                    <div class="empty-icon">🍽️</div>
+                    <div class="empty-text">No food logged yet</div>
+                    <div class="empty-subtext">Add your first meal!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Screen -->
+    <div id="progress-screen" class="screen">
+        <div class="container">
+            <h1>📈 Your Progress</h1>
+            
+            <!-- Streak Card -->
+            <div class="streak-card">
+                <div class="streak-icon">🔥</div>
+                <div class="streak-content">
+                    <div class="streak-number" id="streak-number">0</div>
+                    <div class="streak-label">Day Streak</div>
+                </div>
+            </div>
+            
+            <!-- Weekly Averages -->
+            <div class="averages-section">
+                <h3>Weekly Averages</h3>
+                <div class="averages-grid">
+                    <div class="average-item">
+                        <div class="average-icon">🔥</div>
+                        <div class="average-value" id="avg-calories">0</div>
+                        <div class="average-label">Calories</div>
+                    </div>
+                    <div class="average-item">
+                        <div class="average-icon">🥩</div>
+                        <div class="average-value" id="avg-protein">0g</div>
+                        <div class="average-label">Protein</div>
+                    </div>
+                    <div class="average-item">
+                        <div class="average-icon">🍞</div>
+                        <div class="average-value" id="avg-carbs">0g</div>
+                        <div class="average-label">Carbs</div>
+                    </div>
+                    <div class="average-item">
+                        <div class="average-icon">🥑</div>
+                        <div class="average-value" id="avg-fat">0g</div>
+                        <div class="average-label">Fat</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weekly Chart -->
+            <div class="chart-section">
+                <h3>7-Day Overview</h3>
+                <div class="chart-container">
+                    <canvas id="progressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            
+            <!-- Daily Breakdown -->
+            <div class="daily-breakdown">
+                <h3>Daily Breakdown</h3>
+                <div class="daily-list" id="daily-list">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Flask & general app stuff
+instance/
+*.db
+*.sqlite3
+*.sqlite
+
+# Logs
+*.log
+*.out
+*.err
+
+# Config / secrets
+.env
+*.env
+
+# IDE & editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pytest / coverage
+.coverage
+htmlcov/
+.cache/
+
+# Distribution / packaging
+build/
+dist/
+*.egg
+.eggs/
+pip-wheel-metadata/
+
+# Deployment
+*.bak
+*.pid
+*.seed
+*.manifest
+*.spec
