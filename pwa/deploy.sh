@@ -79,3 +79,4 @@ esac
 echo ""
 echo "🎉 Deployment instructions complete!"
 echo "💡 Remember to update the API_BASE_URL in main.js to point to your backend"
+

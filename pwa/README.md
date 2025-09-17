@@ -158,3 +158,4 @@ If the install prompt doesn't appear:
 ## License
 
 This project is part of the Diet Tracker application.
+

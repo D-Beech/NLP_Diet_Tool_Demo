@@ -1,0 +1,30 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - echo "Installing Python dependencies..."
+        - pip install -r requirements.txt
+        - echo "Backend build completed"
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Preparing PWA files..."
+        - echo "PWA files are ready in the pwa/ directory"
+    build:
+      commands:
+        - echo "Building Flask app with PWA integration..."
+        - echo "Flask app will serve PWA from root and API endpoints"
+    postBuild:
+      commands:
+        - echo "Build completed successfully"
+        - echo "Flask app ready to serve PWA and API"
+  artifacts:
+    baseDirectory: .
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - venv/**/*
+      - __pycache__/**/*

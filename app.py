@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
 import json
 from openai import OpenAI
@@ -9,7 +9,7 @@ import aiohttp
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='pwa', static_url_path='')
 CORS(app)  # Enable CORS for all routes
 
 # Simple in-memory storage
@@ -277,8 +277,13 @@ def calculate_totals():
 
 @app.route('/')
 def home():
-    totals = calculate_totals()
-    return render_template('index.html', food_log=food_log, totals=totals)
+    """Serve the PWA from the root"""
+    return send_file('pwa/index.html')
+
+@app.route('/<path:filename>')
+def serve_pwa_files(filename):
+    """Serve PWA static files"""
+    return send_from_directory('pwa', filename)
 
 @app.route('/api/add_food', methods=['POST'])
 def add_food():

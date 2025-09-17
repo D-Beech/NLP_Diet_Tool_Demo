@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing dependencies..."
+        - echo "No dependencies to install for static PWA"
+    build:
+      commands:
+        - echo "Building PWA for production..."
+        - echo "PWA is already built and ready for deployment"
+    postBuild:
+      commands:
+        - echo "PWA build completed successfully"
+        - echo "Files ready for deployment:"
+        - ls -la
+  artifacts:
+    baseDirectory: .
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

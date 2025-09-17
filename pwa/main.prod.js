@@ -808,3 +808,4 @@ document.addEventListener('DOMContentLoaded', function() {
     showScreen('add');
     console.log('PWA app initialized');
 });
+
