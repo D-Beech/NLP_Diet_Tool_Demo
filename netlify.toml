@@ -1,7 +1,11 @@
 [build]
-  command = "echo 'No build needed for PWA + Netlify Functions'"
+  command = "./build.sh"
   functions = "netlify/functions"
   publish = "pwa"
+
+[build.environment]
+  NODE_VERSION = "18"
+  PYTHON_VERSION = ""
 
 [[redirects]]
   from = "/api/*"

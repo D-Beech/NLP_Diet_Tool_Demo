@@ -1,0 +1,31 @@
+# Ignore Python files for Netlify build
+*.py
+__pycache__/
+venv/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Keep only PWA and Netlify function files
+!pwa/
+!netlify/
+!netlify.toml
+!package.json
+!build.sh
+!.nvmrc
