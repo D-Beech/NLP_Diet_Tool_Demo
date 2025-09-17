@@ -3,17 +3,16 @@ frontend:
   phases:
     preBuild:
       commands:
-        - echo "Installing dependencies..."
-        - echo "No dependencies to install for static PWA"
+        - echo "Preparing PWA for deployment..."
+        - echo "PWA files are ready for static hosting"
     build:
       commands:
-        - echo "Building PWA for production..."
-        - echo "PWA is already built and ready for deployment"
+        - echo "Building PWA..."
+        - echo "No build step needed for static PWA"
     postBuild:
       commands:
         - echo "PWA build completed successfully"
-        - echo "Files ready for deployment:"
-        - ls -la
+        - echo "Ready for deployment"
   artifacts:
     baseDirectory: .
     files:
