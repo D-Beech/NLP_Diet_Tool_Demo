@@ -1,11 +1,10 @@
 [build]
-  command = "./build.sh"
+  command = "echo 'PWA build complete - Node.js only'"
   functions = "netlify/functions"
   publish = "pwa"
 
 [build.environment]
   NODE_VERSION = "18"
-  PYTHON_VERSION = ""
 
 [[redirects]]
   from = "/api/*"
