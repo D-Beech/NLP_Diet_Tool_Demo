@@ -1,5 +1,5 @@
-// Configuration
-const API_BASE_URL = ''; // Use relative URLs to call the same Flask app
+// Netlify Configuration - PWA calls Netlify functions
+const API_BASE_URL = ''; // Use relative URLs for Netlify functions
 
 // State management
 let currentFoodLog = [];
@@ -808,4 +808,3 @@ document.addEventListener('DOMContentLoaded', function() {
     showScreen('add');
     console.log('PWA app initialized');
 });
-
