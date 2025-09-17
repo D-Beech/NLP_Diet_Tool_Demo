@@ -1,0 +1,15 @@
+{
+  "name": "diet-tracker-netlify",
+  "version": "1.0.0",
+  "description": "Diet Tracker PWA with Netlify Functions",
+  "main": "netlify/functions/api.js",
+  "scripts": {
+    "build": "echo 'No build needed'",
+    "dev": "netlify dev"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
